@@ -7,6 +7,7 @@ gem "activerecord"
 gem "sqlite3"
 gem "logger"
 
+
 group :development do
   gem "pry"
 end

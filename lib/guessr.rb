@@ -1,8 +1,8 @@
-require "guessr/version"
-require "guessr/init_db"
+require_relative "guessr/version"
+require_relative "guessr/init_db"
 
-require "guessr/player"
-require "guessr/game"
+require_relative "guessr/player"
+require_relative "guessr/game"
 
 require "pry"
 
@@ -71,7 +71,8 @@ module Guessr
 
     def take_turn
       @game.show_progress if @game.last_guess
-      guess = prompt("What is your new guess? (1-1000)", /^\d{1,3}$/)
+      guess = prompt("What is your new guess? (1-1000 or E to exit )", /^[eE]$|^\d{1,3}$/)
+      exit if guess.downcase == "e"
       @game.make_guess(guess.to_i)
     end
 
@@ -98,7 +99,7 @@ module Guessr
   end
 end
 
-binding.pry
+
 
 app = Guessr::App.new
 app.run
